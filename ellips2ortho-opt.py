@@ -128,7 +128,6 @@ if __name__ == "__main__":
                 st.error(msg)
                 st.stop()
     
-        
         st.success('All CSVs checked and uploaded successfully.')
         
         map_options = filenames.copy()
@@ -204,7 +203,7 @@ if __name__ == "__main__":
                     prog = 0
                     
                     x = 0
-                    wdw = 15                    
+                    wdw = 20                    
                     while x < len(df[lat]):
 
                         lat_req = list(df[lat][x:x+wdw])
