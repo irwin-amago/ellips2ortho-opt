@@ -13,10 +13,7 @@ loop = asyncio.new_event_loop()
 asyncio.set_event_loop(loop)
 nest_asyncio.apply()
 
-def request_height(session, i, lat, lon, geoid):
-    
-    print(lat,lon)
-    
+def request_height(session, i, lat, lon, geoid):    
     cmd_h = 'https://geodesy.noaa.gov/api/ncat/llh?'    
     req_h = cmd_h + 'lat=' + str(lat) + '&lon=' + str(lon) + '&inDatum=nad83(1986)&outDatum=nad83(2011)'
     
@@ -24,9 +21,7 @@ def request_height(session, i, lat, lon, geoid):
         lat_nad = response.json()['destLat']
         lon_nad = response.json()['destLon']
         if response.status_code != 200:
-            print("FAILURE::{0}".format(req_h))
-    
-    print(lat_nad,lon_nad)
+            st.text("FAILURE::{0}".format(req_h))
 
     cmd_v = 'https://geodesy.noaa.gov/api/geoid/ght?'    
     req_v = cmd_v + 'lat=' + lat_nad + '&lon=' + lon_nad + '&model=' + str(geoid)
@@ -34,7 +29,7 @@ def request_height(session, i, lat, lon, geoid):
     with session.get(req_v) as response:  
         geoid_h = response.json()['geoidHeight']
         if response.status_code != 200:
-            print("FAILURE::{0}".format(req_v))
+            st.text("FAILURE::{0}".format(req_v))
         return geoid_h
 
 async def start_async_process(lat, lon, geoid):
@@ -195,7 +190,7 @@ if __name__ == "__main__":
         
         # Run Conversion
         
-        if uploaded and not geoid_select=='<select>' and not units_select=='<select>':
+        if uploaded and geoid_select != '<select>' and units_select != '<select>':
             if st.button('CONVERT HEIGHTS'):
                 file_ctr = 0
                 for df in dfs:
@@ -283,7 +278,7 @@ if __name__ == "__main__":
                         data=fp,
                         file_name='Converted_CSV.zip',
                         mime='application/zip',
-                )
+                        )
         st.stop()
     else:
         st.stop()
