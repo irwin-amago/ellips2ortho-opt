@@ -1,4 +1,5 @@
 --find-links=https://girder.github.io/large_image_wheels GDAL
+asyncio
 geemap
 geopandas
 geopy
@@ -7,6 +8,7 @@ keplergl
 leafmap
 localtileserver
 nbserverproxy
+nest_asyncio
 rasterio
 streamlit
 streamlit-option-menu
