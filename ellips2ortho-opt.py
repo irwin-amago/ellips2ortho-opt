@@ -21,7 +21,7 @@ def request_height(session, i, lat, lon, geoid):
         lat_nad = response.json()['destLat']
         lon_nad = response.json()['destLon']
         if response.status_code != 200:
-            msg = "FAILURE::{0}".format(req_h)
+            msg = 'FAILURE::{0}'.format(req_h)
             st.error(msg)
 
     cmd_v = 'https://geodesy.noaa.gov/api/geoid/ght?'    
@@ -30,7 +30,7 @@ def request_height(session, i, lat, lon, geoid):
     with session.get(req_v) as response:  
         geoid_h = response.json()['geoidHeight']
         if response.status_code != 200:
-            msg = "FAILURE::{0}".format(req_v)
+            msg = 'FAILURE::{0}'.format(req_v)
             st.error(msg)
         return geoid_h
 
